@@ -24,23 +24,3 @@ export const log = credentials => dispatch => {
     });
 };
 
-export const DATA_FETCH_START = "DATA_FETCH_START";
-export const DATA_FETCH_SUCCESS = "DATA_FETCH_SUCCESS";
-export const DATA_FETCH_FAIL = "DATA_FETCH_FAIL";
-
-export const fetchFriends = () => dispatch => {
-  dispatch({ type: DATA_FETCH_START });
-  axios
-    .get("http://localhost:5000/api/friends", {
-      headers: { Authorization: localStorage.getItem("token") }
-    })
-    .then(response => {
-      dispatch({
-        type: DATA_FETCH_SUCCESS,
-        payload: response.data
-      });
-    })
-    .catch(error => {
-      dispatch({ type: DATA_FETCH_FAIL, payload: error.response });
-    });
-};
