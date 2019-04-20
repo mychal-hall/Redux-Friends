@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
+import logo from "./logo.svg";
 import { connect } from "react-redux";
 import { deleteFriend, updateOneFriend, showUpdate } from "../actions";
-
+import UpdateFriendForm from "./UpdateFriendForm";
+import SelectedFriend from "./SelectedFriend";
 class FriendsList extends Component {
   handleDelete = () => {
     const { id } = this.props.friendSelected;
@@ -62,4 +64,4 @@ export default connect(
     updateOneFriend,
     showUpdate
   }
-)(Friends);
+)(FriendsList);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import logo from "./logo.svg";
 import FriendsList from "./FriendsList";
+import FriendForm from "./FriendForm";
 import { getFriends } from "../actions";
 import { connect } from "react-redux";
 
@@ -14,7 +15,7 @@ class App extends Component {
       <div className="App">
         <header>
           <h1>Mike's 'Friends'</h1>
-          {/* Form will go here */}
+          <FriendForm />
         </header>
         {this.props.error ? <h3>Error Fetching Friends</h3> : null}
         <div>

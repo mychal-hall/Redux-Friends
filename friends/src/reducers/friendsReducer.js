@@ -2,11 +2,13 @@ import * as actionTypes from "../actions";
 
 const initialState = {
   friends: [],
+  isLoggingIn: false,
   gettingFriends: false,
   updatingFriend: false,
   addingFriend: false,
   deletingFriend: false,
-  error: null
+  error: null,
+  credentials: []
 };
 
 export const friendsReducer = (state = initialState, action) => {
@@ -36,6 +38,16 @@ export const friendsReducer = (state = initialState, action) => {
         updatingFriend: false,
         error: action.payload
       };
+    case actionTypes.LOGIN_START: {
+      return { ...state, isLoggingIn: true };
+    }
+    case actionTypes.LOGIN_YES: {
+      return { ...state, isLoggingIn: false, credentials: action.credentials };
+    }
+    case actionTypes.LOGIN_NO: {
+      return { ...state, isLoggingIn: false };
+    }
+
     default:
       return state;
   }

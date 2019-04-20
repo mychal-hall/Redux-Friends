@@ -11,6 +11,33 @@ export const UPDATE_FRIEND_TOG = "UPDATE_FRIEND_TOG";
 export const DELETE_FRIEND = "DELETE_FRIEND";
 export const DELETING_FRIEND = "DELETING_FRIEND";
 export const ONE_FRIEND = "ONE_FRIEND";
+export const LOGIN_START = "LOGIN_START";
+export const LOGIN_YES = "LOGIN_YES";
+export const LOGIN_NO = "LOGIN_NO";
+
+export const login = credentials => dispatch => {
+  dispatch({ type: LOGIN_START });
+  localStorage.removeItem("token");
+  return axios
+    .post("http://localhost:5000/api/login", {
+      username: "Lambda School",
+      password: "i<3Lambd4"
+    })
+    .then(response => {
+      localStorage.setItem("token", response.data.payload);
+      dispatch({
+        type: LOGIN_YES,
+        payload: response.data,
+        credentials: credentials
+      });
+    })
+    .catch(error => {
+      if (error.response.status === 403) {
+        localStorage.removeItem("token");
+      }
+      dispatch({ type: LOGIN_NO, payload: error.response.message });
+    });
+};
 
 export const getFriends = () => {
   const friends = axios.get("http://localhost:5000/api/friends/get");
